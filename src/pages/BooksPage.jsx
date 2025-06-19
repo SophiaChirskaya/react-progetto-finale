@@ -1,7 +1,9 @@
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import BookCard from "../components/BookCard";
-import Icons from "./components/Icons";
+// import Icons from "./components/Icons";
+
 
 const BooksPage = () => {
     const [books, setBooks] = useState([]);
@@ -23,14 +25,15 @@ const BooksPage = () => {
             params.search = searchTerm;
         }
 
-        axios
-        .get(apiLaravel, { params })
+        axios.get(`${apiLaravel}`, { params })
         .then((resp) => {
             setBooks(resp.data.data);
             setNoResults(resp.data.data.length === 0 && searchTerm.length > 0);
             setInitialLoad(false);
             setLoading(false);
+            
         })
+        
         .catch((error) => {
             console.error("Error loading books:", error);
             setBooks([]);
@@ -89,7 +92,7 @@ const BooksPage = () => {
                     setSearch(e.target.value);
                     setSearchError("");//cancella eventuale errore mentre scrivi
                 }}/>
-                <button className="btn btn-warning ms-2" type="submit" >Cerca</button>
+                <button className="btn btn-warning ms-2" type="submit">Cerca</button>
             </form>
 
             {/* Error message */}
@@ -103,12 +106,12 @@ const BooksPage = () => {
 
             {/* Nessun risultato trovato */}
             {!loading && noResults && !searchError && (
-                <p className="text-center mt-4 text-blue fw-bold" >Nessun autore o libro trovato</p>
+                <p className="text-center mt-4 text-blue fw-bold">Nessun autore o libro trovato</p>
             )}
 
             {/* Card sempre visibili */}
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-3">
-                {books.map((book) =>(
+                {books.map((book) => (
                     <div key={book.id} className="col-md-4 mb-4">
                         <BookCard book={book} />
                     </div>
@@ -119,13 +122,12 @@ const BooksPage = () => {
             {!loading && searchClicked && !searchError && (
                 <div className="text-center">
                     <button className="btn btn-warning mt-3" 
-                    onClick={handleResetSearch}>Mostra tutti i libri
-                    </button>
+                    onClick={handleResetSearch}>Mostra tutti i libri</button>
                 </div>
             )}
         </div>
 
-        <Icons />
+        {/* <Icons /> */}
         
         </>
     );

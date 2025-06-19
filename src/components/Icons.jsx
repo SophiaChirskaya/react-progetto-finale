@@ -1,8 +1,8 @@
-const icons = () => {
+const Icons = () => {
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            bahavior: "smooth",
+            behavior: "smooth",
         });
     };
 
