@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 // import Icons from "./components/Icons";
 
+
 const SingleBook = () => {
     const { id } = useParams();
     const [singleBook, setSingleBook] = useState(null);
@@ -56,6 +57,18 @@ const SingleBook = () => {
             <h5 className="text-center"><strong>Autore:</strong> {singleBook.author}</h5>
             <p className="text-center"><strong>Anno:</strong> {singleBook.year}</p>
             <p className="lead text-center">{singleBook.content || "Nessuna sinossi disponibile"}</p>
+
+            <hr />
+            {singleBook.types && singleBook.types.length > 0 && (
+                <div className="text-center mt-3">
+                    {singleBook.types.map((type) => (
+                        <span key={type.id} className="badge bg-info text-dark me-2">
+                            {type.name}
+                        </span>
+                    ))}
+
+                </div>
+            )}
 
             {/* <Icons /> */}
 
