@@ -2,10 +2,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import BookCard from "../components/BookCard";
-// import Icons from "./components/Icons";
+
 
 
 const BooksPage = () => {
+    // Variabili dello stato con le funzioni setter per aggiornamenti dello stato 
     const [books, setBooks] = useState([]);
     const [search, setSearch] = useState("");
     const [noResults, setNoResults] = useState(false);
@@ -13,9 +14,11 @@ const BooksPage = () => {
     const [loading, setLoading] = useState(false);
     const [initialLoad, setInitialLoad] = useState(true);
     const [searchClicked, setSearchClicked] = useState(false);
-
+    
+    // URL dell'API dal file .env
     const apiLaravel = import.meta.env.VITE_API_URL;
 
+    // Funzione per caricare i libri, opzionalmente filtrando per termine di ricerca
     const loadBooks = (searchTerm = "") => {
         setSearchError("");
         setLoading(true);
@@ -127,7 +130,7 @@ const BooksPage = () => {
             )}
         </div>
 
-        {/* <Icons /> */}
+        
         
         </>
     );
